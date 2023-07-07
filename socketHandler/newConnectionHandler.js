@@ -1,10 +1,10 @@
-const serverStore = require("../serverStrore");
+const serverStore = require("../serverStore");
 
 const newConnectionHandler = async (socket, io) => {
   const userDetails = socket.user;
   serverStore.addNewConnectedUser({
     socketId: socket.id,
-    userId:userDetails.userId
+    userId:userDetails?.userId
   })
 }
 

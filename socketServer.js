@@ -10,6 +10,7 @@ const registerSocketServer = (server) => {
   });
 
   io.use((socket, next) => {
+
     authSocket(socket,next)
   })
 

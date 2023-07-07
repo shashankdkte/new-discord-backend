@@ -4,10 +4,12 @@ const config = process.env;
 
 const verifyTokenSocket = (socket, next) => {
   const token = socket.handshake.auth?.token;
+  console.log(socket.handshake.auth);
 
   try
   {
     const decoded = jwt.verify(token, config.TOKEN_KEY);
+  
     socket.user = decoded;
   }
   catch (err)
@@ -16,7 +18,7 @@ const verifyTokenSocket = (socket, next) => {
     return next(socketError)
   }
 
-  next()
+  next();
 }
 
 module.exports = verifyTokenSocket;
