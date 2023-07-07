@@ -6,7 +6,7 @@ const { error } = require("console");
 
 const socketServer = require("./socketServer")
 const authRoute = require("./routes/authRoute")
-
+const friendsInvitationRoutes = require("./routes/friendInvitationRoutes")
 require("dotenv").config();
 
 
@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/auth", authRoute);
+app.use("/api/friend-invitation", friendsInvitationRoutes);
 
 const server = http.createServer(app);
 socketServer.registerSocketServer(server)
