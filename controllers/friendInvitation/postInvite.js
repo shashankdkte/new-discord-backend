@@ -1,4 +1,5 @@
 const FriendInvitation = require("../../models/friendInvitaiton");
+const friendsUpdate = require("../../socketHandler/updates/friends")
 const User = require("../../models/user");
 
 
@@ -49,6 +50,10 @@ const User = require("../../models/user");
    })
 
    //Update Friends Invitations
+
+   //send pending invitatins
+   friendsUpdate.updateFriendsPendingInvitations(targetUser._id.toString());
+   
   return res.status(201).send("Invitations has been sent")
 }
 
