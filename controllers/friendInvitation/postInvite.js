@@ -43,7 +43,13 @@ const User = require("../../models/user");
    }
    
    //Create new Invitation in Database
-  return res.send("Controller is Working")
+   const newInvitation = await FriendInvitation.create({
+     senderId: userId,
+     receiverId:targetUser._id
+   })
+
+   //Update Friends Invitations
+  return res.status(201).send("Invitations has been sent")
 }
 
 module.exports = postInvite
