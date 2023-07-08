@@ -13,18 +13,27 @@ const postAccept = async(req, res) => {
      return res.status(401).send("Error occurred. Please try again");
    }
    const { senderId, receiverId } = invitation;
+   //console.log("senderId ->",senderId)
+   //console.log("receiverId ->",receiverId)
 
    //add friends to both user
    const senderUser = await User.findById(senderId);
-   senderUser.friends = [...senderUser.friends, receiverId]
+   senderUser.friends = [...senderUser.friends, receiverId];
+   //console.log("senderUser -> ",senderUser);
+   
    
    const receiverUser = await User.findById(receiverId);
    receiverUser.friends = [...receiverUser.friends, senderId];
-
+   //console.log("receiverUser -> ", receiverUser);
+   
+   await senderUser.save();
+   await receiverUser.save();
    //delete invitation
    await FriendInvitation.findByIdAndDelete(id);
 
    //update friendlist for both
+   friendUpdates.updateFriends(senderId.toString());
+   friendUpdates.updateFriends(receiverId.toString());
 
    //update list of pending invitations
    friendUpdates.updateFriendsPendingInvitations(receiverId.toString());
