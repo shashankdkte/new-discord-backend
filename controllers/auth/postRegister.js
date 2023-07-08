@@ -39,7 +39,8 @@ try {
     userDetails: {
       mail: user.mail,
       token,
-      username:user.username
+     username: user.username,
+      _id:user._id
     }
   })
 } catch (error) {
