@@ -1,4 +1,4 @@
-const conversation = require("../models/conversation");
+const Conversation = require("../models/conversation");
 const chatUpdates = require("./updates/chat")
 
 const directChatHistoryHandler = async (socket, data) => {
@@ -7,7 +7,7 @@ const directChatHistoryHandler = async (socket, data) => {
     const { userId } = socket.user;
     const { receiverUserId } = data;
 
-    const conversation = await conversation.findOne({
+    const conversation = await Conversation.findOne({
       participants: { $all: [userId, receiverUserId] },
       type:"DIRECT"
       
